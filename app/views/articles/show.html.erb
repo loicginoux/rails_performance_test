@@ -1,0 +1,19 @@
+<% cache [ "show_article", @article ] do %>
+	<div class="pull-right">
+		<%= link_to 'Admin', admin_article_path(@article), :class => "btn btn-primary"  %>
+	</div>
+	<h1>
+	  <%= @article.title %>
+	</h1>
+
+	<p>
+	  <%= @article.content %>
+	</p>
+<% end %>
+
+<hr>
+<h2>Comments</h2>
+<%= render :partial => "comments/form_article_comment" %>
+<hr>
+
+<%= render :partial => "comments/article_comments" %>

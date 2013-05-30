@@ -1,0 +1,44 @@
+<div class="pull-right">
+	<%= link_to "Stats", admin_article_stats_article_comments_path(@article.id), :class => "btn btn-primary"  %>
+</div>
+<p>Total: <%= @count %></p>
+<br>
+<% cache ["v1", cache_key_for(@comments, @count), params[:id], params[:page], params[:from], params[:to], @status] do %>
+	<table class="table table-striped">
+		<tr>
+			<th>Id</th>
+			<th>User</th>
+			<th>Creation Date</th>
+			<th>Content</th>
+			<th>Moderated</th>
+			<th>Opinion</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<% @comments.each do |comment| %>
+		<tr>
+			<td><%= comment.id %></td>
+			<td>user_<%= comment.user_id %></td>
+			<td><%= comment.created_at %></td>
+			<td><%= comment.content %></td>
+			<td><%= render :partial => "comments/moderated", :locals => {:moderated => comment.is_moderated}  %></td>
+			<td><%= render :partial => "comments/opinion", :locals => {:opinion => comment.opinion}  %></td>
+
+			<td>
+				<select class="input-small opinion_select" data-comment-id="<%= comment.id %>">
+					<option value="" <% if !comment.is_moderated %>selected="selected"<% end %> >Not moderated</option>
+					<option value="positive" <% if comment.opinion == "positive" %>selected="selected"<% end %> >Positive</option>
+					<option value="negative" <% if comment.opinion == "negative"%>selected="selected"<% end %> >Negative</option>
+					<option value="neutral" <% if comment.opinion == "neutral" %>selected="selected"<% end %> >Neutral</option>
+				</select>
+			</td>
+			<td>
+			<%= link_to 'Destroy', [:admin, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+
+<% unless @comments.empty? %>
+<%= will_paginate @comments %>
+<% end %>

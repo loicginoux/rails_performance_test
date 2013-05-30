@@ -1,0 +1,15 @@
+<%= form_for([@article, Comment.new], :class=> "form-horizontal") do |f| %>
+
+<div class="control-group">
+	<label class="control-label">Add your comment:</label>
+	<div class="controls">
+		<%= f.text_area :content, :rows => 5, :cols => 20 %>
+	</div>
+	<%= f.hidden_field :article_id, :value => @article.id  %>
+</div>
+
+<div class="control-group">
+	<%= f.submit "Add Comment", :class => "btn"  %>
+</div>
+<% end %>
+

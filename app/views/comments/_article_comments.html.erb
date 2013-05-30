@@ -1,0 +1,6 @@
+<p>Total comments: <%= @countComments %></p>
+<ul>
+<% @comments.each do |comment| %>
+	 <%= render :partial => "comments/article_comment", :locals => {:comment => comment} %>
+<% end %>
+</ul>

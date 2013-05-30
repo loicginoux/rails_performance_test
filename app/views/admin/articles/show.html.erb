@@ -1,0 +1,14 @@
+
+<h2>Comments for <%= link_to @article.title, @article %></h2>
+
+
+<br>
+<div class="row">
+	<div class="span3">
+		<%= render :partial => "admin/comments/search_bar" %>
+	</div>
+
+	<div class="span8">
+		<%= render :partial => "admin/comments/article_comments" %>
+	</div>
+</div>

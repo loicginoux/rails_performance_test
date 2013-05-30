@@ -1,0 +1,38 @@
+<div class="well">
+	<h3>Filters</h3>
+
+	<%= form_tag admin_article_path(@article), :method=>"get" do %>
+		<div class="control-group">
+			<label class="control-label">From:</label>
+			<div class="controls">
+				<div class="input-append date " id="from" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+					<%= text_field_tag :from, params[:from], {:class=> "span2"} %>
+					<span class="add-on"><i class="icon-th"></i></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label">To:</label>
+			<div class="controls">
+				<div class="input-append date " id="to" data-date="<%= Date.today.to_s %>" data-date-format="yyyy-mm-dd">
+					<%= text_field_tag :to, params[:to], {:class=> "span2"}  %>
+					<span class="add-on"><i class="icon-th"></i></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="inputEmail">Filter</label>
+			<div class="controls">
+				<%= select "comment", "status", [["All", ""], ["Moderated", "mod"], ["Not moderated", "not_mod"], ["Positive", "pos"], ["Negative","neg"], ["Neutral","neutr"]], :selected => @status %>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				 <%= submit_tag "Search", :class => "btn btn-primary" %>
+			</div>
+		</div>
+	<% end %>
+
+</div>

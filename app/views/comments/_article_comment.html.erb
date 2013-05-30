@@ -1,0 +1,8 @@
+<% cache ["article_comment", comment] do %>
+	<li class="well">
+		<p><strong>user_<%= comment.user_id %></strong> <%= render :partial => "comments/opinion", :locals => {:opinion => comment.opinion}  %>
+		</p>
+		<span><small><%= comment.created_at.to_formatted_s(:db)  %></small></span>
+		<p><%= comment.content %></p>
+	</li>
+<% end %>

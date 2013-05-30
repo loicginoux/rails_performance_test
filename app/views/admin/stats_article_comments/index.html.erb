@@ -1,0 +1,34 @@
+<div class="pull-right">
+			<%= link_to 'Back', admin_article_path(params[:article_id]), :class => "btn"  %>
+
+</div>
+<h1>Stats</h1>
+
+<p><strong>Note:</strong> only days  with comments appear here</p>
+<table class="table table-striped">
+  <tr>
+    <th>Day</th>
+    <th>Total</th>
+    <th>Not moderated</th>
+    <th><%= render :partial => "comments/opinion", :locals => {:opinion => "positive"}  %></th>
+    <th><%= render :partial => "comments/opinion", :locals => {:opinion => "neutral"}  %></th>
+    <th><%= render :partial => "comments/opinion", :locals => {:opinion => "negative"}  %></th>
+  </tr>
+
+<% @stats.each do |stat| %>
+  <tr>
+    <td><%= stat.day %></td>
+    <td><%= stat.nb_com_tot %></td>
+    <td><%= stat.nb_com_no_mod %></td>
+    <td><%= stat.nb_com_pos %></td>
+    <td><%= stat.nb_com_neutr %></td>
+    <td><%= stat.nb_com_neg %></td>
+  </tr>
+<% end %>
+</table>
+
+<br>
+<% unless @stats.empty? %>
+<%= will_paginate @stats %>
+<% end %>
+
