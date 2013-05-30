@@ -105,8 +105,8 @@ describe Comment do
 	    end
 
 	    it "returns comments from the 'from' date if present" do
-
-	    	Comment.search(@a1, Date.today.to_s, "", "").all.should eq([@c3, @c2])
+	    	Comment.search(@a1, Date.today.to_s, "", "").all.should include(@c3)
+	    	Comment.search(@a1, Date.today.to_s, "", "").all.should include(@c2)
 	    end
 
 	    it "raise an error if from date format is incorrect" do

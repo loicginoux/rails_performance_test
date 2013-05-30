@@ -20,7 +20,7 @@ describe Article do
 			  @a2 = FactoryGirl.create(:article, :created_at => DateTime.now)
 			end
 		  it "orders by most recent first" do
-		  	Article.recent().all.should eq([@a2, @a1])
+		  	Article.recent().all.should eq([@a1, @a2])
 		  end
 		end
 	end

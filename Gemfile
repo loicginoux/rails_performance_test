@@ -27,6 +27,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'shoulda'
+  gem 'selenium-webdriver'
 end
 
 # Gems used only for assets and not required
