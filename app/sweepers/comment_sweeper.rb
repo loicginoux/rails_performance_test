@@ -25,14 +25,16 @@ class CommentSweeper < ActionController::Caching::Sweeper
 
   def expire_cache(comment)
     # we always delete this cache as we can only delete one of the last 10 comment
-    # Rails.cache.delete("article/#{comment.article_id}/comments/all")
-    Rails.cache.delete("article/#{comment.article_id}/comments/moderated/true/last_20")
+    cacheKey = "article/#{comment.article_id}/comments/moderated/true/last_20"
+    if Rails.cache.exist?(cacheKey)
+      Rails.cache.delete(cacheKey)
+    end
 
   end
 
   def update_cache_count(comment, nb)
     cacheKey = "article/#{comment.article_id}/comments/moderated/true/count"
-    count = Rails.cache.fetch(cacheKey)
+    count = Rails.cache.read(cacheKey)
     count = 0 if count.nil?
     Rails.cache.write(cacheKey, count + nb)
   end

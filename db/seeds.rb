@@ -5,7 +5,7 @@ require 'factory_girl_rails'
 require 'faker'
 
 
-nbArticle = 20
+nbArticle = 10
 nbCommentsPerArticle = 1000
 
 nbArticle.times do |n|

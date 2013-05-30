@@ -16,12 +16,14 @@ class ArticleSweeper < ActionController::Caching::Sweeper
 
   def expire_cache(article)
     # we always delete this cache as we can only delete one of the last 10 article
-
-    Rails.cache.delete("articles/last_10")
-    Rails.cache.delete("article/#{article.id}")
+    puts "expire cache"
+    #  this line makes the weird memcache sound...
+    Rails.cache.delete("articles/last_10") if Rails.cache.exist?("articles/last_10")
+    Rails.cache.delete("article/#{article.id}") if Rails.cache.exist?("articles/#{article.id}")
   end
 
   def update_cache_count(nb)
+    puts "update cache counts"
     count = Rails.cache.read("articles/count")
     if count
       Rails.cache.write("articles/count", count + nb)

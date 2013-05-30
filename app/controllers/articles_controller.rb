@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
+    # @articles = Article.select([:id, :title]).recent.limit(10).all
     @articles = Rails.cache.fetch("articles/last_10") do
       Article.select([:id, :title]).recent.limit(10).all
     end
