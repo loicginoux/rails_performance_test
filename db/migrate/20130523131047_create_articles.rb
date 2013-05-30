@@ -6,5 +6,6 @@ class CreateArticles < ActiveRecord::Migration
       t.integer :user_id, :default => 1
       t.timestamps
     end
+    add_index(:articles, :created_at )
   end
 end

@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20130530132121) do
     t.datetime "updated_at",                                 :null => false
   end
 
+  add_index "articles", ["created_at"], :name => "index_articles_on_created_at"
+
   create_table "comments", :force => true do |t|
     t.text     "content"
     t.integer  "user_id",      :default => 1

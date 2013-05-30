@@ -10,19 +10,22 @@ How to use it?
 - install gems:
 > bundle install
 
+- install db, migrate and and seed it:
+> RAILS_ENV=production rake db:populate
+
+Note: see seeds.rb to change the number of articles and comments created.
+Note 2: You need to restart the server everytime you populate the db with the previous command to clear the cache.
+
+
 - start memcached (enabled in production env)
 > memcached -vv
 
 - start delayed_job to enable background process
 > RAILS_ENV=production script/delayed_job run
 
-- install db, migrate and and seed it:
-> RAILS_ENV=production rake db:populate
 
-Note: see seeds.rb to change the number of articles and comments created (default to 20 articles with 10000 comments each).
-Note 2: You need to restart the server everytime you populate the db with the previous command to clear the cache.
 
-- start server
+- start server:
 > RAILS_ENV=production unicorn -p PORT_NAME
 
 
@@ -48,6 +51,9 @@ ARTICLES
 |content      | text     |
 |created_at   | datetime |
 
+indexes:
+(created_at)
+
 
 COMMENTS
 --------
@@ -60,6 +66,8 @@ COMMENTS
 |opinion      | string   |
 |created_at   | datetime |
 
+indexes:
+(article_id, created_at, is_moderated)
 
 
 STATS_ARTICLES_COMMENTS
