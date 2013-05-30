@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523132406) do
+ActiveRecord::Schema.define(:version => 20130530132121) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :default => "untitled article"
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(:version => 20130523132406) do
   end
 
   add_index "comments", ["article_id", "created_at", "is_moderated"], :name => "index_comments_on_article_id_and_created_at_and_is_moderated"
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "stats_article_comments", :force => true do |t|
     t.integer "article_id"

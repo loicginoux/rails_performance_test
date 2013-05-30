@@ -23,8 +23,7 @@ module AlertiTest
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    config.active_record.observers = :comment_observer
-      # , :article_observer
+    config.active_record.observers = :comment_observer, :article_observer
 
     # add sweepers
     config.autoload_paths += %W( #{Rails.root}/app/sweepers )

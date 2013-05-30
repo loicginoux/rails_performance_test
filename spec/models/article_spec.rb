@@ -9,7 +9,8 @@ describe Article do
 
 
 	context "#associations" do
-		it { should have_many( :comments ).dependent(:destroy) }
+		it { should have_many( :comments )}
+		it { should have_many( :stats_article_comments )}
 	end
 
 
