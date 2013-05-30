@@ -1,6 +1,9 @@
 Documentation
 ==============
 
+This is a project to test rails performance. The app consists ony on a basic articles and comments application.
+
+
 How to use it?
 ==============
 
@@ -35,36 +38,41 @@ Database tables
 
 ARTICLES
 -------
-user_id
-title string
-content text
-created_at
+| columns     |  type    |
+|:------------|:---------|
+|user_id      | integer  |
+|title        | string   |
+|content      | text     |
+|created_at   | datetime |
 
 
 COMMENTS
 --------
-user_id integer
-content text
-is_moderated boolean
-opinion (positifs, neutres, négatifs)
-article_id integer
-created_at Datetime
+| columns     |  type    |
+|:------------|:---------|
+|user_id      | integer  |
+|article_id   | integer  |
+|is_moderated | boolean  |
+|content      | text     | (positifs, neutres, négatifs)
+|opinion      | string   |
+|created_at   | datetime |
 
-indexes:
-(article_id, created_on, is_moderated )
 
 
 STATS_ARTICLES_COMMENTS
 -----------------------
 (used for performances. store the counters for a given day and a given article)
 
-article_id
-day Date
-nb_com_tot INT
-nb_com_pos INT
-nb_com_neg INT
-nb_com_neutr INT
-nb_com_no_mod INT
+| columns     |  type    |
+|:------------|:---------|
+|article_id   | integer  |
+|day          | date     |
+|nb_com_tot   | integer  |
+|nb_com_no_mod| integer  |
+|nb_com_pos   | integer  |
+|nb_com_neutr | integer  |
+|nb_com_neg   | integer  |
+
 
 indexes:
 (article_id, day)
@@ -84,6 +92,7 @@ Techniques used for increasing performance
 
 Techniques that could have been used for better performance:
 ===========================================================
+
 - I chose Active Record for interacting with the db, Datamapper seems to be a better choice for performances but it isn't well supported among other gems. This can be something to dig more to improve performances.
 - hardware wasn't the focus on this exercice but implementing a load balancer and working with several databases will increase performances in the real world.
 - In real conditions I would have gone with a NoSQL database like MongoDB instead of SQL. This is quicker and scale really well when working with a lot of data. I was going to use it but the exercice advised to use MySQL. interesting article: http://www.slideshare.net/jrosoff/scalable-event-analytics-with-mongodb-ruby-on-rails
@@ -98,12 +107,15 @@ Techniques that could have been used for better performance:
 
 CACHES KEYS:
 ===========
-last 10 articles                         : "articles/last_10"
-count total articles                     : "articles/count"
-one article                              : "article/#{article_id}"
 
-last 20 moderated comments for an article: "article/#{article_id}/comments/moderated/true/last_20"
-count total moderated article            : "article/#{article_id}/comments/moderated/true/count"
+| key                                                     |  explanation                                |
+|:--------------------------------------------------------|:--------------------------------------------|
+| "articles/last_10"                                      | last 10 articles                            |
+| "articles/count"                                        | count total articles                        |
+| "article/#{article_id}"                                 | one article                                 |
+| "article/#{article_id}/comments/moderated/true/last_20" | last 20 moderated comments for an article   |
+| "article/#{article_id}/comments/moderated/true/count"   | count total moderated comments              |
+
 
 All these cache are supposed not be invalidated too quickly. I decided not to cache more about comments as the frequency of comments created is supposed to be too high for a cache system to be useful.
 
