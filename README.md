@@ -1,7 +1,7 @@
 Documentation
 ==============
 
-This is a project to test rails performance. The app consists ony on a basic articles and comments application.
+This is a project to test rails performance. The app consists ony on a basic articles and comments application where a lot of comments are created at the same time.
 
 
 How to use it?
@@ -31,6 +31,10 @@ Note 2: You need to restart the server everytime you populate the db with the pr
 
 You can do the same steps in development where caching is disabled.
 
+
+- prepare testing environment
+> rake db:test:prepare
+> RAILS_ENV=test rake db:migrate
 
 - run unit tests:
 > rspec spec
