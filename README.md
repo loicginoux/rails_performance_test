@@ -1,8 +1,18 @@
 Documentation
 ==============
 
-This is a project to test rails performance. The app consists ony on a basic articles and comments application where a lot of comments are created at the same time.
+This is a project to test and put in practice some rails and db performance tasks. 
+The app consists on a basic articles and comments application. We imagin that the app can have thousands of articles and for each article, you can have potentially thousands or millions of comments.
+The app has four pages:
+- a page that list the last 10 articles, that you can destroy.
+- a page that show the article and the last 20 moderated comments made. You can also add a comment on this page. A comment is first in a "not moderated" state.
+- an admin page for an article that list all comments paginated. The goal of this page is for the admin to change the state of comments, it can destroy one or change the state to either "not moderated", "positive", "negative" or "neutral". In this page you also also filter comments by creation date or by state.
+- an admin reporting page for one article. The report is a table where each row is a day. for each day you have: the number of not moderated comments, the number of positive, the number of negative and the number of neutral comments.
 
+The goal is to make the app as quick as possible. The report page should be quick to respond and instantly reflect the comments changes.
+The admin page should search and filter fast.
+
+Let's go!
 
 How to use it?
 ==============
