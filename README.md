@@ -2,7 +2,7 @@ Documentation
 ==============
 
 This is a project to test and put in practice some rails and db performance tasks. 
-The app consists on a basic articles and comments application. We imagin that the app can have thousands of articles and for each article, you can have potentially thousands or millions of comments.
+The app consists on a basic articles and comments application. We imagine that the app can have thousands of articles and for each article, you can have potentially thousands or millions of comments.
 The app has four pages:
 - a page that list the last 10 articles, that you can destroy.
 - a page that show the article and the last 20 moderated comments made. You can also add a comment on this page. A comment is first in a "not moderated" state.
@@ -121,10 +121,10 @@ Techniques that could have been used for better performance:
 
 - I chose Active Record for interacting with the db, Datamapper seems to be a better choice for performances but it isn't well supported among other gems. This can be something to dig more to improve performances.
 - hardware wasn't the focus on this exercice but implementing a load balancer and working with several databases will increase performances in the real world.
-- In real conditions I would have gone with a NoSQL database like MongoDB instead of SQL. This is quicker and scale really well when working with a lot of data. I was going to use it but the exercice advised to use MySQL. interesting article: http://www.slideshare.net/jrosoff/scalable-event-analytics-with-mongodb-ruby-on-rails
+- A NoSQL database like MongoDB instead of MySQL would have been another good choice as it is designed to scale really easily when working with high volume data. interesting article: http://www.slideshare.net/jrosoff/scalable-event-analytics-with-mongodb-ruby-on-rails
 - more benchmarking and profiling (http://www.dan-manges.com/blog/rails-performance-tuning-workflow)
 - adjusting MySQL configuration would help as well.
-- use a Sphinx search server for searching
+- use of Elastic Search for searching
 - write more performance tests
 
 
